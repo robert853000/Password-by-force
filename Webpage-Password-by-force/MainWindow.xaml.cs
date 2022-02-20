@@ -687,7 +687,7 @@ namespace Webpage_Password_by_force
                     logReports.Text += BruteGuesser._reqInfo;
                     BruteGuesser._reqInfo = "";
 
-                    int maxLength = 3000;
+                    int maxLength = 500000;
                     int reportLength = logReports.Text.Length;
                     if (reportLength > maxLength)
                     {

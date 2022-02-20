@@ -159,74 +159,29 @@ namespace Webpage_Password_by_force
             }
             catch (WebException webException)
             {
-                /* HttpStatusCode.Forbidden
-                //var resp2 = (FtpWebResponse)wr.;
-                //var webException = ex.InnerException as WebException;
-                //var rawResponse = string.Empty;
-
                 if (webException.Status == WebExceptionStatus.ProtocolError)
                 {
-
                     statusCode = ((HttpWebResponse)webException.Response).StatusCode;
                     using (Stream data = webException.Response.GetResponseStream())
                     using (var reader = new StreamReader(data))
                     {
-                        errorMsg += "Request Headers:\n";
-                        errorMsg += url.OriginalString + "\n" + wr.Headers + "\n";
+                        // Request Headers + Post Data
+                        _reqInfo += fakeRequest.postMethod + " " + url.OriginalString + "\n\n" + wr.Headers + "\n\n" + postData + "\n\n\n";
 
-                        errorMsg += "Status Code: " + statusCode.ToString() + "\n";
-                        errorMsg += "Status Description: " + ((HttpWebResponse)webException.Response).StatusDescription + "\n";
-                        errorMsg += "Response Headers:\n";
-                        errorMsg += ((HttpWebResponse)webException.Response).Headers + "\n";
-                        errorMsg += "Response:\n";
-                        errorMsg += reader.ReadToEnd() + "\n";
+                        _reqInfo += "Response Status Code:" + statusCode.ToString()  + ": " + ((HttpWebResponse)webException.Response).StatusDescription + "\n\n" + ((HttpWebResponse)webException.Response).Headers + "\n\n";
+
+                        _reqInfo += reader.ReadToEnd() + "\n\n-----------------------------------------------------------\n\n";
                     }
 
                     switch (statusCode)
                     {
                         case HttpStatusCode.Forbidden:
-                            //pageSrc = "403" + ((HttpWebResponse)webException.Response).Headers.ToString();
-                            //pageSrc = postData;
-
-                            //HttpWebResponse resp2 = (HttpWebResponse)wr.GetResponse();
-                            //StreamReader sr = new StreamReader(resp.GetResponseStream());
-                            //pageSrc = sr.ReadToEnd(); 
                             break;
                         default:
-                            //pageSrc = ((HttpWebResponse)webException.Response).StatusCode.ToString();
                             break;
                     }
 
-                }*/
-
-              // pageSrc += errorMsg;
-
-                //var webException = exception.InnerException as WebException;
-                //string rawResponse = "";
-                /*
-                 * vresp = (HttpWebResponse)wr.GetResponse();
-
-                //WebHeaderCollection header = resp.Headers;
-                cookies.Add(resp.Cookies);
-
-                StreamReader sr = new StreamReader(resp.GetResponseStream());*/
-                /*
-                var alreadyClosedStream = webException.Response.GetResponseStream() as MemoryStream;
-                using (var brandNewStream = new MemoryStream(alreadyClosedStream.ToArray()))
-                using (var reader = new StreamReader(brandNewStream))
-                    rawResponse = reader.ReadToEnd();
-
-                pageSrc = rawResponse;
-                */
-                // pageSrc = webException.Response.GetResponseStream().sta;
-                // if ((int)resp2.StatusCode ==403)
-
-                // {
-                //     pageSrc = "403";
-                // }else
-                //  {
-                //     MessageBox.Show(ex.ToString());
-                //  }
+                }
 
                 if (resp != null)
                 {

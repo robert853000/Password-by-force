@@ -97,7 +97,7 @@ namespace Webpage_Password_by_force
         {
             targetURL = null;
             Uri uri;
-
+            
             if (!Uri.TryCreate(s, UriKind.Absolute, out uri))
             {
                 msgBox("Not a valid url: '" + s + "'");
@@ -112,6 +112,7 @@ namespace Webpage_Password_by_force
         {
             Uri uri;
             string s = injectCustomValues(targetURL.OriginalString, false);
+            //msgBox(s);
             if (!Uri.TryCreate(s, UriKind.Absolute, out uri))
             {
                 msgBox("Not a valid url: '" + s + "'");
@@ -178,15 +179,33 @@ namespace Webpage_Password_by_force
         public void removeCookie(webCookieX cookieX)
         {
             CookieContainer cookies_container = updatedCookieContainer;
-            foreach (Cookie each_cookie in cookies_container.GetCookies(new Uri("http://" + cookieX.vDomain + cookieX.vPath)))
+            string d = cookieX.vDomain;
+            if (d.StartsWith("."))
             {
+                d = d.Remove(0, 1);
+            }
+            string s = "http://" + d + cookieX.vPath;
 
-                if (!each_cookie.Expired && each_cookie.Name == cookieX.vName)
+            Uri uri;
+            if (!Uri.TryCreate(s, UriKind.Absolute, out uri))
+            {
+                msgBox("777 Fail: invalid uri:'" + s + "'");
+            }
+            else
+            {
+                
+                foreach (Cookie each_cookie in cookies_container.GetCookies(uri))
                 {
-                    each_cookie.Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+
+                    if (!each_cookie.Expired && each_cookie.Name == cookieX.vName)
+                    {
+                        each_cookie.Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
+                    }
+
                 }
 
             }
+           
 
             cookieItems.Remove(cookieX);
         }
@@ -258,7 +277,22 @@ namespace Webpage_Password_by_force
 
             foreach (webCookieX co in cookieItems)
             {
-                myCookieContainer.SetCookies(new Uri("http://" + co.vDomain + co.vPath), co.vName + "=" + co.vValue + ";"); // "a=a,b=b"
+                string d = co.vDomain;
+                if (d.StartsWith("."))
+                {
+                    d = d.Remove(0, 1);
+                }
+                string s = "http://" + d + co.vPath;
+
+                Uri uri;
+                if (!Uri.TryCreate(s, UriKind.Absolute, out uri))
+                {
+                    msgBox("Fail: invalid uri:'" + s + "'");
+                }else
+                {
+                    myCookieContainer.SetCookies(uri, co.vName + "=" + co.vValue + ";"); // "a=a,b=b"
+                }
+                
 
             }
 
@@ -281,7 +315,7 @@ namespace Webpage_Password_by_force
             {
                 uriStr = uriStr.Remove(0, 1);
             }
-            if (uriStr.StartsWith("/"))
+            if (uriStr.StartsWith("."))
             {
                 uriStr = uriStr.Remove(0, 1);
             }
@@ -291,7 +325,7 @@ namespace Webpage_Password_by_force
             bool isMatch = regex.IsMatch(uriStr);
             if (!isMatch)
             {
-                msgBox("Not a valid url: '" + uriStr + "'");
+                msgBox("000 Not a valid url: '" + uriStr + "'");
             }
             return isMatch;
 
@@ -338,6 +372,7 @@ namespace Webpage_Password_by_force
             {
 
                 wr.Headers.Add(Uri.EscapeDataString(header.vName), Uri.EscapeDataString(header.vValue));
+                //wr.Headers.Add(Uri.EscapeDataString(header.vName), header.vValue);
             }
         }
     

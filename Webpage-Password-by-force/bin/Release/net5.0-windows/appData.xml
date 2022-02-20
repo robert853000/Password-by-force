@@ -1,23 +1,24 @@
-<myAppData xmlns="http://schemas.datacontract.org/2004/07/Webpage_Password_by_force" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><REST>[{"username":"$$$username", "password":"$$$password", "token":"0"}]</REST><attackMethod/><containsKey/><containsKey2>Invalid login or password</containsKey2><cookiesList><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>1</vId><vName>PHPSESSID</vName><vPath>/</vPath><vValue>9s6ffc7bguj09b026aard2m3l4</vValue></webCookieX><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>2</vId><vName>Test</vName><vPath>/</vPath><vValue>48067</vValue></webCookieX><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>3</vId><vName>Test2</vName><vPath>/</vPath><vValue>47652</vValue></webCookieX></cookiesList><dealy>200</dealy><headersList><httpHeaderX><vId>1</vId><vName>User-Agent</vName><vValue>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0</vValue></httpHeaderX><httpHeaderX><vId>2</vId><vName>Accept</vName><vValue>*/*</vValue></httpHeaderX><httpHeaderX><vId>3</vId><vName>Referer</vName><vValue/></httpHeaderX><httpHeaderX><vId>4</vId><vName>Accept-Encoding</vName><vValue>gzip</vValue></httpHeaderX><httpHeaderX><vId>5</vId><vName>Accept-Language</vName><vValue>en-US,en;q=0.8</vValue></httpHeaderX><httpHeaderX><vId>6</vId><vName>x-requested-with</vName><vValue>XMLHttpRequest</vValue></httpHeaderX><httpHeaderX><vId>7</vId><vName>Origin</vName><vValue/></httpHeaderX></headersList><info>&#xD;
-126. GET localhost =&gt;  Login Failed Daniel:password Time for =&gt; 2267,1571ms&#xD;
-127. GET localhost =&gt;  Login Failed Daniel:12345678 Time for =&gt; 2310,4134ms&#xD;
-128. GET localhost =&gt;  Login Failed Daniel:111111 Time for =&gt; 2251,2466ms&#xD;
-129. GET localhost =&gt;  Login Failed Daniel:123123 Time for =&gt; 2256,6642ms&#xD;
-130. GET localhost =&gt;  Login Failed Daniel:1234567890 Time for =&gt; 2273,9805ms&#xD;
-131. GET localhost =&gt;  Login Failed Daniel:1234567 Time for =&gt; 2274,2066ms&#xD;
-132. GET localhost =&gt;  Login Failed Daniel:qwerty123 Time for =&gt; 2269,1316ms&#xD;
-133. GET localhost =&gt;  Login Failed Daniel:000000 Time for =&gt; 2322,9189ms&#xD;
-134. GET localhost =&gt;  Login Failed Daniel:1q2w3e Time for =&gt; 2271,122ms&#xD;
-135. GET localhost =&gt;  Login Failed Daniel:q2w3e Time for =&gt; 2263,7192ms&#xD;
-136. GET localhost =&gt;  Login Sucessful Daniel:aa12345678 Time for =&gt; 2278,4922ms&#xD;
-137. GET localhost =&gt;  Login Failed Daniel:abc123 Time for =&gt; 2239,3997ms&#xD;
-138. GET localhost =&gt;  Login Failed Daniel:password1 Time for =&gt; 2269,0639ms&#xD;
-139. GET localhost =&gt;  Login Failed Daniel:1234 Time for =&gt; 2311,1355ms&#xD;
-140. GET localhost =&gt;  Login Failed Daniel:18 Time for =&gt; 2242,1087ms&#xD;
-141. GET localhost =&gt;  Login Failed Daniel:qwertyuiop Time for =&gt; 2276,8109ms&#xD;
-142. GET localhost =&gt;  Login Failed Daniel:123321 Time for =&gt; 2268,6372ms&#xD;
-143. GET localhost =&gt;  Login Failed Daniel:Password Time for =&gt; 2258,3454ms&#xD;
-144. GET localhost =&gt;  Login Failed Daniel:11111 Time for =&gt; 2239,6939ms&#xD;
+<myAppData xmlns="http://schemas.datacontract.org/2004/07/Webpage_Password_by_force" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><REST>[{"username":"$$$username", "password":"$$$password", "token":"0"}]</REST><attackMethod/><containsKey/><containsKey2>Invalid login or password</containsKey2><cookiesList><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>1</vId><vName>PHPSESSID</vName><vPath>/</vPath><vValue>qk5aat8bd0nrd0s9bq80r0noq6</vValue></webCookieX><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>2</vId><vName>Test</vName><vPath>/</vPath><vValue>65156</vValue></webCookieX><webCookieX><cook i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/System.Net"/><vDomain>localhost</vDomain><vId>3</vId><vName>Test2</vName><vPath>/</vPath><vValue>68191</vValue></webCookieX></cookiesList><dealy>200</dealy><headersList><httpHeaderX><vId>8</vId><vName>User-Agent</vName><vValue>Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0</vValue></httpHeaderX><httpHeaderX><vId>9</vId><vName>Accept</vName><vValue>*/*</vValue></httpHeaderX><httpHeaderX><vId>10</vId><vName>Referer</vName><vValue/></httpHeaderX><httpHeaderX><vId>11</vId><vName>Accept-Encoding</vName><vValue>gzip</vValue></httpHeaderX><httpHeaderX><vId>12</vId><vName>Accept-Language</vName><vValue>en-US,en;q=0.8</vValue></httpHeaderX><httpHeaderX><vId>13</vId><vName>x-requested-with</vName><vValue>XMLHttpRequest</vValue></httpHeaderX><httpHeaderX><vId>14</vId><vName>Origin</vName><vValue/></httpHeaderX></headersList><info>&#xD;
+55. POST localhost =&gt;  Login Failed Maria:12345678 Time for =&gt; 2281,9549ms&#xD;
+56. POST localhost =&gt;  Login Failed Maria:111111 Time for =&gt; 2254,9914ms&#xD;
+57. POST localhost =&gt;  Login Failed Maria:123123 Time for =&gt; 2259,6772ms&#xD;
+58. POST localhost =&gt;  Login Failed Maria:1234567890 Time for =&gt; 2257,7023ms&#xD;
+59. POST localhost =&gt;  Login Failed Maria:1234567 Time for =&gt; 2253,9441ms&#xD;
+60. POST localhost =&gt;  Login Failed Maria:qwerty123 Time for =&gt; 2241,6293ms&#xD;
+61. POST localhost =&gt;  Login Failed Maria:000000 Time for =&gt; 2237,1101ms&#xD;
+62. POST localhost =&gt;  Login Failed Maria:1q2w3e Time for =&gt; 2241,1673ms&#xD;
+63. POST localhost =&gt;  Login Failed Maria:q2w3e Time for =&gt; 2252,5084ms&#xD;
+64. POST localhost =&gt;  Login Failed Maria:aa12345678 Time for =&gt; 2238,3087ms&#xD;
+65. POST localhost =&gt;  Login Failed Maria:abc123 Time for =&gt; 2234,4837ms&#xD;
+66. POST localhost =&gt;  Login Failed Maria:password1 Time for =&gt; 2246,9773ms&#xD;
+67. POST localhost =&gt;  Login Failed Maria:1234 Time for =&gt; 2259,383ms&#xD;
+68. POST localhost =&gt;  Login Failed Maria:18 Time for =&gt; 2241,4382ms&#xD;
+69. POST localhost =&gt;  Login Sucessful Maria:qwertyuiop Time for =&gt; 2258,1107ms&#xD;
+70. POST localhost =&gt;  Login Failed Maria:123321 Time for =&gt; 2268,2311ms&#xD;
+71. POST localhost =&gt;  Login Failed Maria:Password Time for =&gt; 2252,4726ms&#xD;
+72. POST localhost =&gt;  Login Failed Maria:11111 Time for =&gt; 2285,9563ms&#xD;
+Paused&#xD;
+73. POST localhost =&gt;  Login Failed Anna:r7rg94w95gt5y98 Time for =&gt; 2242,1202ms&#xD;
 &#xD;
 </info><passwordWordlist>r7rg94w95gt5y98&#xD;
 123456&#xD;
@@ -42,13 +43,11 @@ password1&#xD;
 qwertyuiop&#xD;
 123321&#xD;
 Password&#xD;
-11111 </passwordWordlist><postList><httpPost><vId>1</vId><vName>password</vName><vValue>$$$password</vValue></httpPost><httpPost><vId>2</vId><vName>username</vName><vValue>$$$username</vValue></httpPost></postList><requestMethod>GET</requestMethod><targetURL>http://localhost/api/login.php?username=$$$username&amp;password=$$$password</targetURL><timeout>200000</timeout><usernamesWordlist>David&#xD;
+11111 </passwordWordlist><postList><httpPost><vId>3</vId><vName>password</vName><vValue>$$$password</vValue></httpPost><httpPost><vId>4</vId><vName>username</vName><vValue>$$$username</vValue></httpPost></postList><requestMethod>POST</requestMethod><targetURL>http://localhost/api/login.php?username=$$$username&amp;password=$$$password</targetURL><timeout>200000</timeout><usernamesWordlist>David&#xD;
 Alex&#xD;
 Maria&#xD;
 Anna&#xD;
 Marco&#xD;
 Daniel</usernamesWordlist><validLogins>localhost =&gt; David:password1
 localhost =&gt; Maria:qwertyuiop
-localhost =&gt; Anna:18
-localhost =&gt; Daniel:aa12345678
 </validLogins><wordlistStorage/></myAppData>
