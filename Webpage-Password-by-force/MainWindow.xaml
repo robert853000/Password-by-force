@@ -5,27 +5,383 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Webpage_Password_by_force"
         mc:Ignorable="d"
-        Title="Webpage password by force" Height="494" Width="800" Closing="Window_Closing_1">
-    <Grid Margin="0,0,0,-6">
+         SizeChanged="Window_SizeChanged"
+        
+       
+        Title="Webpage password by force" Height="700" Width="1200" Closing="Window_Closing_1" Background="Black">
+    <Grid Margin="10,10,10,10" Background="#FF232A37">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="59*"/>
-            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="userList" HorizontalAlignment="Left" Margin="20,39,0,0" Text="David&#xD;&#xA;Alex&#xD;&#xA;Maria&#xD;&#xA;Anna&#xD;&#xA;Marco&#xD;&#xA;Daniel"  TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Height="170" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter usernames " AutomationProperties.Name="userList" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="5"/>
-        <Label Content="Usernames:" HorizontalAlignment="Left" Margin="20,8,0,0" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="5"/>
-        <TextBox x:Name="passwordList" HorizontalAlignment="Left" Margin="95,39,0,0" Text="1&#xD;&#xA;123456&#xD;&#xA;123456789&#xD;&#xA;12345&#xD;&#xA;qwerty&#xD;&#xA;password&#xD;&#xA;12345678&#xD;&#xA;111111&#xD;&#xA;123123&#xD;&#xA;1234567890&#xD;&#xA;1234567&#xD;&#xA;qwerty123&#xD;&#xA;000000&#xD;&#xA;1q2w3e&#xD;&#xA;aa12345678&#xD;&#xA;abc123&#xD;&#xA;password1&#xD;&#xA;1234&#xD;&#xA;18&#xD;&#xA;qwertyuiop&#xD;&#xA;123321" TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Height="170" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter passwords" AutomationProperties.Name="passwordList" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="4"/>
-        <Label Content="Passwords:&#xD;&#xA;" HorizontalAlignment="Left" Margin="95,8,0,0" VerticalAlignment="Top" Width="140" Grid.Column="4"/>
-        <TextBox x:Name="reportMsg" HorizontalAlignment="Left" Margin="20,264,0,0" Text="..." TextWrapping="NoWrap" VerticalAlignment="Top" Width="755" Height="141" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter passwords" AutomationProperties.Name="reportMsg" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="6"/>
-        <Button x:Name="btnStart" Content="Run Brute &gt;&gt;" HorizontalAlignment="Left" Margin="254,109,0,0" VerticalAlignment="Top" AutomationProperties.Name="btnStart" Click="btnStart_Click" Grid.ColumnSpan="2" Grid.Column="4"/>
-        <Button x:Name="btnClear" Content="Clear log" HorizontalAlignment="Left" Margin="19,410,0,0" VerticalAlignment="Top" AutomationProperties.Name="btnClear" Click="btnClear_Click" RenderTransformOrigin="0.518,0.503" Grid.ColumnSpan="4"/>
-        <ProgressBar x:Name="progresBar1" HorizontalAlignment="Left" Height="10" Margin="20,244,0,0" VerticalAlignment="Top" Width="755" Grid.ColumnSpan="6"/>
-        <Label x:Name="labelMsg" Content="" HorizontalAlignment="Left" Margin="25,214,0,0" VerticalAlignment="Top" Grid.ColumnSpan="6" Drop="labelMsg_Drop" Width="750"/>
-        <TextBox x:Name="successfulLogin" HorizontalAlignment="Left" Margin="67,41,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="140" Height="170" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter passwords" AutomationProperties.Name="successfulLogin" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="5"/>
-        <Label Content="Valid logins:&#xA;" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" Width="140" Grid.Column="5"/>
+        <TabControl  SelectionChanged="TabControl_SelectionChanged" BorderBrush="#FF232A37" Background="#FF232A37" Visibility="Visible">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="4,4,0,0" Margin="2,0">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,10"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="Attack Control" Background="White" Foreground="#FF61952E" FontWeight="Normal" FontStyle="Normal" Margin="0,0,0,0" RenderTransformOrigin="0.5,0.5" Padding="18,8,15,8">
+                <TabItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </TabItem.RenderTransform>
+                <Grid>
+                    <ScrollViewer x:Name="_scroll3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <Grid x:Name="attackControls" Background="#FF232A37" Width="1141" Height="590">
+                            <Label x:Name="percentComplete" Content="" HorizontalAlignment="Left" Margin="430,177,0,0" VerticalAlignment="Top" Drop="labelMsg_Drop" Width="75" Height="26" Grid.RowSpan="1" Foreground="White" FontWeight="Bold"/>
+                            <Button x:Name="btnStart" Content="Run Brute" HorizontalAlignment="Left" Margin="82,70,0,0" VerticalAlignment="Top" AutomationProperties.Name="btnStart" Click="btnStart_Click" Grid.RowSpan="1" Foreground="White" Background="#FFC21614" Padding="10,3,10,3" FontWeight="Bold" FontSize="16"/>
+                            <Label x:Name="totalCombinationsTitle" Content="Total combinations:" HorizontalAlignment="Left" Margin="82,120,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734"/>
+                            <Label x:Name="totalCombinations" Content="Total combinations:" HorizontalAlignment="Left" Margin="203,120,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734" Width="48"/>
+                            <Label x:Name="progressTitle" Content="Statistics:" HorizontalAlignment="Left" Margin="82,144,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow"/>
+                            <RichTextBox x:Name="richControl" Margin="535,10,26,29" Background="#FF0E0E0E" Foreground="#FF0AB47C" BorderBrush="#FF232A37" TextChanged="RichTextBox_TextChanged" FontSize="14">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        <Run Text="RichTextBox"/>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+                            <Label x:Name="currentPasswordTitle" Content="Trying Login:" HorizontalAlignment="Left" Margin="257,120,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734"/>
+                            <Label x:Name="currentPassword" Content="Trying Login:" HorizontalAlignment="Left" Margin="340,120,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734" Width="190"/>
+                            <Label x:Name="timeElapsedTitle" Content="Time:" HorizontalAlignment="Left" Margin="257,144,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734"/>
+                            <Label x:Name="timeElapsed" Content="Time:" HorizontalAlignment="Left" Margin="303,144,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="13" Foreground="Yellow" RenderTransformOrigin="0.525,0.734" Width="255"/>
+                            <Label x:Name="passwordsRemainingTitle" Content="Passwords remaining:" HorizontalAlignment="Left" Margin="257,196,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="11" Foreground="#FFE4E4E4"/>
+                            <Label x:Name="passwordsRemaining" Content="Passwords remaining:" HorizontalAlignment="Left" Margin="376,196,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="11" Foreground="#FFE4E4E4"/>
+                            <Label x:Name="passwordsCheckedTitle" Content="Passwords checked :" HorizontalAlignment="Left" Margin="82,196,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="11" Foreground="#FFE4E4E4"/>
+                            <Label x:Name="passwordsChecked" Content="Passwords checked :" HorizontalAlignment="Left" Margin="190,196,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="11" Foreground="#FFE4E4E4" Width="66"/>
+                            <ProgressBar x:Name="progresBar1" Margin="87,184,0,0" Grid.RowSpan="1" HorizontalAlignment="Left" Width="338" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Height="12">
+                                <ProgressBar.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ProgressBar.RenderTransform>
+                            </ProgressBar>
+                            <Label x:Name="validLoginsTitle" Content="Valid logins:" HorizontalAlignment="Left" Margin="82,392,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF277ED9" FontWeight="ExtraBold" FontSize="14"/>
+                            <TextBox x:Name="validLogins" Margin="82,423,0,29" TextWrapping="NoWrap" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter passwords" AutomationProperties.Name="successfulLogin" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.RowSpan="1" Background="#FF232A37" Foreground="#FF03D2FE" BorderBrush="#FF232A37" BorderThickness="2,2,2,2" HorizontalAlignment="Left" Width="417"/>
+                            <Label x:Name="timeRemaining" Content="Time remaining:" HorizontalAlignment="Left" Margin="256,161,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="11" Foreground="#FFE4E4E4" Width="267"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Attack Method">
+                <Grid Background="#FF232A37">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="251"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15*"/>
+                        <RowDefinition Height="604*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="123.008"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label x:Name="lbl" Content="Select attack method" HorizontalAlignment="Left" Margin="53,58,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF277ED9" FontWeight="Bold" Height="26" Width="129"/>
+                        <ComboBox HorizontalAlignment="Left" Margin="91,84,0,0" VerticalAlignment="Top" Width="120" Height="21">
+                            <ComboBoxItem Content="Brute-force attack"/>
+                            <ComboBoxItem Content="Dictionary attack" IsSelected="True"/>
+                        </ComboBox>
+                        <Grid Grid.Row="1" Margin="0,11,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="36*"/>
+                                <RowDefinition Height="205*"/>
+                            </Grid.RowDefinitions>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0,11,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="84.528"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid x:Name="Dict_files" Background="#FF232A37" Margin="0,5,0,0" Grid.Row="1" Visibility="Hidden">
+                                <Label x:Name="lbl_Copy2" Content="Passworfd file" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF277ED9" FontWeight="Bold"/>
+                                <TextBox HorizontalAlignment="Left" Margin="94,36,0,0" Text="Password word list file" TextWrapping="Wrap" VerticalAlignment="Top" Width="342"/>
+                                <Button Content="Browse" HorizontalAlignment="Left" Margin="452,34,0,0" VerticalAlignment="Top"/>
+                                <Label x:Name="lbl_Copy3" Content="Username file" HorizontalAlignment="Left" Margin="56,71,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF277ED9" FontWeight="Bold"/>
+                                <TextBox HorizontalAlignment="Left" Margin="94,97,0,0" Text="User name word list file" TextWrapping="Wrap" VerticalAlignment="Top" Width="342"/>
+                                <Button Content="Browse" HorizontalAlignment="Left" Margin="452,95,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Label x:Name="lbl_Copy4" Content="Word list source" HorizontalAlignment="Left" Margin="56,7,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF277ED9" FontWeight="Bold" Height="26"/>
+                            <ComboBox HorizontalAlignment="Left" Margin="94,33,0,0" VerticalAlignment="Top" Width="120" Height="21">
+                                <ComboBoxItem Content="Input" IsSelected="True"/>
+                                <ComboBoxItem Content="File"/>
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                    <Grid x:Name="Dict_inputs" Grid.Column="1"  Margin="0,17,0,0" Grid.Row="1">
+                        <Label x:Name="___Passwords_" Content="Passwords:" HorizontalAlignment="Left" Margin="59,4,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Width="67" Foreground="#FF277ED9" FontWeight="Bold"/>
+                        <Label x:Name="Usernames" Content="Usernames:" HorizontalAlignment="Left" Margin="236,4,0,0" VerticalAlignment="Top" Height="26" Grid.RowSpan="1" Width="71" Foreground="#FF277ED9" FontWeight="Bold"/>
+                        <TextBox x:Name="usernamesWordlist" HorizontalAlignment="Left" Margin="247,30,0,10" Text="David&#xA;Alex&#xA;Maria&#xA;Anna&#xA;Marco&#xA;Daniel"  TextWrapping="NoWrap" Width="140" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter usernames " AutomationProperties.Name="userList" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#FF036891" Foreground="#FF03D2FE" BorderBrush="#FF00ACEF" BorderThickness="2,2,2,2"/>
+                        <TextBox x:Name="passwordsWordlist" HorizontalAlignment="Left" Margin="69,30,0,10" Text="r7rg94w95gt5y98&#xA;123456&#xA;123456789&#xA;12345&#xA;qwerty&#xA;password&#xA;12345678&#xA;111111&#xA;123123&#xA;1234567890&#xA;1234567&#xA;qwerty123&#xA;000000&#xA;1q2w3e&#xA;aa12345678&#xA;abc123&#xA;password1&#xA;1234&#xA;18&#xA;qwertyuiop&#xA;123321&#xA;Password&#xA;11111" TextWrapping="NoWrap" Width="140" TextChanged="TextBox_TextChanged" AutomationProperties.HelpText="Enter passwords" AutomationProperties.Name="passwordList" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#FF036891" Foreground="#FF03D2FE" BorderBrush="#FF00ACEF" BorderThickness="2,2,2,2"/>
+                    </Grid>
+
+
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Meta data &amp; Headers" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <Grid Background="#FF232A37" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  Height="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ScrollViewer x:Name="_scroll5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <Grid x:Name="MetaInfo" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"  Height="619" Width="1170">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="294*"/>
+                                <ColumnDefinition Width="293*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="vertical" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  Height="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid x:Name="horizontal" VerticalAlignment="Top" Height="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True" Margin="0,0,0,0"  x:Name="_scroll2" Height="500">
+                                        <Grid  Margin="0,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalAlignment="Stretch" Height="auto">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+
+
+
+                                            <Grid x:Name="uri" Background="#FF232A37" VerticalAlignment="Center" Height="80" Margin="34,0,34,0" >
+                                                <Label x:Name="lbl_Copy" Content="Target URL" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="#FF277ED9" FontWeight="Bold" FontSize="14"/>
+                                                <TextBox x:Name="apiUri" HorizontalAlignment="Left" Margin="37,36,0,0" Text="http://localhost/api/login.php?username=$$$username&amp;password=$$$password" TextWrapping="Wrap" VerticalAlignment="Top" Width="457"/>
+                                            </Grid>
+
+
+
+                                            <Label x:Name="lbl_Copy1"  Grid.Row="2" Content="Headers" HorizontalAlignment="Left" Margin="34,15,80,0" VerticalAlignment="Top" Foreground="#FF277ED9" FontWeight="Bold" Background="Black" Padding="10,10,10,10"/>
+                                            <ItemsControl x:Name="apiHeadersList" Grid.Row="3" Margin="0,0,0,0">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid  Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+
+                                                            <TextBox  HorizontalAlignment="Left" Margin="37,10,0,0" Text="{Binding vName}" TextWrapping="Wrap" VerticalAlignment="Top" Width="133"/>
+                                                            <TextBox  HorizontalAlignment="Left" Margin="197,10,0,0" Text="{Binding vValue}" TextWrapping="Wrap" VerticalAlignment="Top" Width="287"  Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" />
+                                                            <Button Content="X" HorizontalAlignment="Left" Margin="497,9,0,0" VerticalAlignment="Top"  Click="btnRemoveHeader" CommandParameter="{Binding vId}"  Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350"/>
+                                                            <TextBox  HorizontalAlignment="Left" Margin="197,10,0,0" Text="{Binding vId}" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" Visibility="Hidden" />
+
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+                                            <Grid  Background="Black" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+
+                                                <TextBox x:Name="addHeaderName" HorizontalAlignment="Left" Margin="37,10,0,0" Text="Add header" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Add header" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <TextBox x:Name="addHeaderValue"  HorizontalAlignment="Left" Margin="197,10,0,0" Text="Add value" TextWrapping="Wrap" VerticalAlignment="Top" Width="260"  Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Add value" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <Button Content="Add" HorizontalAlignment="Left" Margin="462,9,0,0" VerticalAlignment="Top"  Click="btnAddHeader" CommandParameter="" Width="46"  Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" />
+
+                                            </Grid>
+
+
+                                            <Label x:Name="lbl_Copy5"  Grid.Row="5" Content="Cookies" HorizontalAlignment="Left" Margin="34,15,80,0" VerticalAlignment="Top" Foreground="#FF277ED9" FontWeight="Bold" Background="Black" Padding="10,10,10,10"/>
+
+                                            <ItemsControl x:Name="apiCookieList" Grid.Row="6" Margin="0,0,0,0">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid  Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+
+                                                            <TextBox  HorizontalAlignment="Left" Margin="37,10,0,0" Text="{Binding vName}" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" IsReadOnly="true"/>
+
+                                                            <TextBox   HorizontalAlignment="Left" Margin="117,10,0,0" Text="{Binding vValue}" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" IsReadOnly="false" KeyDown="onCookieTextChanged" KeyUp="onCookieTextChanged"  />
+                                                            <TextBox  HorizontalAlignment="Left" Margin="257,10,0,0" Text="{Binding vPath}" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" IsReadOnly="true" />
+                                                            <TextBox  HorizontalAlignment="Left" Margin="343,10,0,0" Text="{Binding vDomain}" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" IsReadOnly="true" />
+                                                            <Button Content="X" HorizontalAlignment="Left" Margin="497,9,0,0" VerticalAlignment="Top"  Click="btnRemoveCookie" CommandParameter="{Binding vId}"  Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" />
+                                                            <TextBox  HorizontalAlignment="Left" Margin="197,10,0,0" Text="{Binding vId}" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" Visibility="Hidden"  />
+
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+
+                                            <Grid  Background="Black" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+
+                                                <TextBox x:Name="addCookieName" HorizontalAlignment="Left" Margin="37,10,0,0" Text="Add cookie" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Add cookie" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <TextBox x:Name="addCookieValue"  HorizontalAlignment="Left" Margin="117,10,0,0" Text="Add value" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Add value" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <TextBox x:Name="addCookiePath"  HorizontalAlignment="Left" Margin="257,10,0,0" Text="/" TextWrapping="Wrap" VerticalAlignment="Top" Width="89" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Cookie path" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <TextBox x:Name="addCookieDomain"  HorizontalAlignment="Left" Margin="351,10,0,0" Text="Add domain" TextWrapping="Wrap" VerticalAlignment="Top" Width="106" Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" ToolTip="Add domain" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                                <Button Content="Add" HorizontalAlignment="Left" Margin="462,9,0,0" VerticalAlignment="Top"  Click="btnAddCookie" CommandParameter="" Width="46"  Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" />
+
+                                            </Grid>
+
+                                            <Grid x:Name="uri_Copy4" Background="Black" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="86" Width="518">
+                                                <Label x:Name="lbl_Copy9" Content="Method" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="#FF277ED9" FontWeight="Bold"/>
+                                                <ComboBox x:Name="apiMethod" HorizontalAlignment="Left" Margin="38,0,0,0" VerticalAlignment="Center" Width="120" SelectionChanged="apiMethod_SelectionChanged">
+                                                    <ComboBoxItem Content="POST" IsSelected="True"/>
+                                                    <ComboBoxItem Content="GET"/>
+                                                </ComboBox>
+                                            </Grid>
+
+
+
+
+
+
+
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Grid>
+                            <Grid Margin="10,0,0,0" Height="Auto" Grid.Column="1" Background="Black">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label x:Name="lbl_Copy6" Grid.Row="0"   Content="Payload" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="#FF80D233" FontWeight="ExtraBold" Background="{x:Null}" FontSize="14" />
+
+
+                                <Label x:Name="lbl_Copy7"  Grid.Row="1"  Content="POST" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"  FontSize="14"/>
+
+
+                                <ItemsControl x:Name="apiPostList" Grid.Row="2" Margin="0,0,0,0">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid  Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+                                                <TextBox  HorizontalAlignment="Left" Margin="33,10,0,0" Text="{Binding vName}" ToolTip="Key" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" TextChanged="TextBox_TextChanged_2" Foreground="White" Background="#FF050505" BorderBrush="#FF6A6A6A" />
+                                                <TextBox  HorizontalAlignment="Left" Margin="174,10,0,0" Text="{Binding vValue}" ToolTip="Val" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" TextChanged="TextBox_TextChanged_1" Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" />
+                                                <Button Content="X" HorizontalAlignment="Left" Margin="497,9,0,0" VerticalAlignment="Top"  Click="btnRemovePostItem" CommandParameter="{Binding vId}"  Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Grid x:Name="uri_Copy2" Background="Black" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Height="33" Width="518">
+
+                                    <TextBox x:Name="addPostName" HorizontalAlignment="Left" Margin="33,10,0,0" Text="Key" ToolTip="Key" TextWrapping="Wrap" VerticalAlignment="Top" Width="133" TextChanged="TextBox_TextChanged_2" Foreground="White" Background="#FF050505" BorderBrush="#FF6A6A6A" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                    <TextBox x:Name="addPostVal" HorizontalAlignment="Left" Margin="174,10,0,0" Text="Val" ToolTip="Val" TextWrapping="Wrap" VerticalAlignment="Top" Width="287" TextChanged="TextBox_TextChanged_1" Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" GotFocus="onGotFocus" LostFocus="onLostFocus"/>
+                                    <Button Content="Add" HorizontalAlignment="Left" Margin="466,10,0,0" VerticalAlignment="Top"  Click="btnAddPost" CommandParameter="" Width="46"  Foreground="#FF979393" Background="Black" BorderBrush="#FF3E5B49" />
+
+                                </Grid>
+
+
+
+
+                                <Grid x:Name="uri_Copy3" Background="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Height="270" Width="518" Grid.Row="4">
+                                    <Label x:Name="lbl_Copy8" Content="REST Payload" HorizontalAlignment="Left" Margin="19,2,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="14"/>
+                                    <TextBox x:Name="apiRestData" HorizontalAlignment="Left" Margin="19,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="471" Height="220" Foreground="#FF0EA350" Background="#FF050505" BorderBrush="#FF0EA350" TextChanged="apiRestData_TextChanged"/>
+                                </Grid>
+
+
+                                <Label x:Name="lbl_Copy10"   Content="Contains" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF80D233" FontWeight="ExtraBold" Background="{x:Null}" FontSize="14" Margin="52,30,0,0" Grid.Row="5" />
+                                <Grid Background="Black" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="518">
+
+
+                                    <TextBox x:Name="apiFirstContains" HorizontalAlignment="Left" Margin="105,29,0,0" Text="" ToolTip="" TextWrapping="Wrap" VerticalAlignment="Top" Width="393"  Foreground="#FFF3FF00" Background="#FF050505" BorderBrush="#FFF3FF00" TextChanged="apiFirstContains_TextChanged"/>
+                                    <TextBox x:Name="apiSecondContains" HorizontalAlignment="Left" Margin="105,52,0,0" Text="" ToolTip="" TextWrapping="Wrap" VerticalAlignment="Top" Width="393"  Foreground="#FFF3FF00" Background="#FF050505" BorderBrush="#FFF3FF00" TextChanged="apiSecondContains_TextChanged"/>
+                                    <Label Content="does not contain" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Foreground="#FF7C6C6C"/>
+
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="NET Client" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center">
+                <Grid Background="#FF25112C">
+                    <ScrollViewer x:Name="_scroll4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                        <Grid x:Name="netClient" Height="619" Width="1174">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="237*"/>
+                                <RowDefinition Height="382*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="lblClientURL" Margin="98,58,480,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="#FF25112C" BorderBrush="#FF6CC3AF"/>
+                            <Label Content="GET" HorizontalAlignment="Left" Margin="110,32,0,0" VerticalAlignment="Top" Foreground="#FF6CC3AF" Width="124"/>
+                            <Button Content="Do GET" HorizontalAlignment="Left" Margin="587,81,0,0" VerticalAlignment="Top" Foreground="White" Background="#FF951442" BorderBrush="#FF951442"/>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="579*"/>
+                                    <ColumnDefinition Width="595*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label x:Name="lblHeadersTitle" Content="Request Headers" HorizontalAlignment="Left" Margin="8,11,0,0" VerticalAlignment="Top" Grid.RowSpan="1" Width="183" Foreground="#FF951442" FontWeight="ExtraBold" FontSize="14"/>
+                                <Label x:Name="lblHeaders" Margin="8,34,10,0" VerticalAlignment="Top" Grid.RowSpan="1" Foreground="#FF951442" FontWeight="Light" Height="338" AutomationProperties.Name="txtCookies2" GotFocus="txtCookies2_GotFocus">
+                                    <Grid Height="741" Width="867"/>
+                                </Label>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" x:Name="lblRequestBodyTitle" Content="Request Body" HorizontalAlignment="Left" Margin="8,-1,0,0" VerticalAlignment="Top"  Width="183" Foreground="#FF951442" FontWeight="ExtraBold" FontSize="14"/>
+                                    <Label Grid.Row="1" x:Name="lblPayload" Margin="10,23,10,-42" Foreground="#FF951442" FontWeight="Light"/>
+                                    <Label Grid.Row="2" x:Name="lblCookies" Margin="10,23,10,-42" Foreground="#FF951442" FontWeight="Light" AutomationProperties.Name="txtCookies2"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Width="68">
+                <Grid Background="#FF232A37">
+                    <TextBox x:Name="logReports" Margin="2,50,0,0" TextWrapping="NoWrap" TextChanged="TextBox_TextChanged" AutomationProperties.Name="reportMsg" AcceptsReturn="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.RowSpan="1" Background="#FF036891" Foreground="#FF03D2FE" BorderBrush="#FF00ACEF" BorderThickness="2,2,2,2" UndoLimit="8"/>
+                    <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" AutomationProperties.Name="btnClear" Click="btnClear_Click" RenderTransformOrigin="0.518,0.503" Grid.RowSpan="1" Foreground="White" Background="#FFC21614" FontSize="14" Padding="9,2,8,2" FontWeight="Bold" FontStyle="Normal"/>
+                    <Button x:Name="btnCopy" Content="Copy all" HorizontalAlignment="Left" Margin="67,10,0,0" VerticalAlignment="Top" AutomationProperties.Name="btnClear" RenderTransformOrigin="0.518,0.503" Grid.RowSpan="1" Foreground="White" Background="#FFC21614" FontSize="14" Padding="9,2,8,2" FontWeight="Bold" FontStyle="Normal"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings" HorizontalAlignment="Center" Height="37" VerticalAlignment="Center" Width="68">
+                <Grid Background="#FF232A37">
+                    <TextBox x:Name="settingsDealy" HorizontalAlignment="Left" Margin="213,78,0,0" Text="200" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" TextChanged="settingsDealy_TextChanged"/>
+                    <Label Content="Sleep Dealy (in ms)" HorizontalAlignment="Left" Margin="95,74,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <Button x:Name="btnResetAllSettings" Content="Reset all" HorizontalAlignment="Left" Margin="95,165,0,0" VerticalAlignment="Top" Click="btnResetAllSettings_Click"/>
+                    <TextBox x:Name="settingsTimeout" HorizontalAlignment="Left" Margin="213,104,0,0" Text="200000" TextWrapping="Wrap" VerticalAlignment="Top" Width="116" TextChanged="settingsTimeout_TextChanged"/>
+                    <Label Content="Timeout" HorizontalAlignment="Left" Margin="95,100,0,0" VerticalAlignment="Top" Foreground="White"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

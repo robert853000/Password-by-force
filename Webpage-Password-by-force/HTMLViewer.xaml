@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Webpage_Password_by_force"
         mc:Ignorable="d"
         Title="HTMLViewer" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="HTMLTEXT" HorizontalAlignment="Left" Margin="20,19,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="720" Height="405"/>
+    <Grid Background="#FF036891">
+        <TextBox x:Name="HTMLTEXT" Margin="10,10,10,5" Text="TextBox" TextWrapping="Wrap" Foreground="#FF03D2FE" Background="#FF036891" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
 
     </Grid>
 </Window>

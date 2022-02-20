@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Webpage_Password_by_force
 {
@@ -13,10 +8,10 @@ namespace Webpage_Password_by_force
         public string[] allPasswords;
         public Dictionary()
         {
-        
+
         }
 
-        public void  loadFromTextBox( TextBox userList, TextBox passwordList)
+        public void loadFromTextBox(TextBox userList, TextBox passwordList)
         {
             allUsers = userList.Text.Split('\n');
             allPasswords = passwordList.Text.Split('\n');
